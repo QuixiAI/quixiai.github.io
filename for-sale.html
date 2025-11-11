@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Performance Computing Hardware for Sale - Quixi.AI</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+        }
+
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #7c3aed;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #7c3aed;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            color: #7c3aed;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Products Section */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .product-card {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: #f5f5f4;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 18px;
+        }
+
+        .product-info h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 20px;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .specs-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #666;
+        }
+
+        .spec-value {
+            color: #111;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #e5e5e5, transparent);
+            margin: 50px 0;
+        }
+
+        /* Featured Bundle */
+        .featured-bundle {
+            border: 3px solid #7c3aed;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #7c3aed;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+        }
+
+        .bundle-description {
+            background: rgba(124, 58, 237, 0.05);
+            border-left: 4px solid #7c3aed;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .bundle-description h4 {
+            color: #7c3aed;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .bundle-description p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .savings-highlight {
+            background: #10b981;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact-box {
+            background: #4c1d95;
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .contact-box h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: #9ca3af;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .product-card {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .featured-badge {
+                font-size: 12px;
+                padding: 6px 16px;
+                top: -12px;
+            }
+
+            .price {
+                font-size: 28px;
+            }
+
+            .savings-highlight {
+                display: block;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">Q</div>
+                    <span>Quixi.AI</span>
+                </a>
+
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>High-Performance <span class="highlight">Computing Hardware</span></h1>
+            <p>Enterprise-grade AI infrastructure available for immediate purchase. Perfect for deep learning, AI research, and large-scale model training.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Available Hardware</h2>
+                <p>Professional-grade equipment maintained in excellent condition</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- DGX Server 1 -->
+            <div class="card">
+                <div class="product-card">
+                    <div class="product-image">
+                        [Product Image Placeholder]
+                    </div>
+                    <div class="product-info">
+                        <div class="badge">ENTERPRISE SERVER</div>
+                        <h3>NVIDIA DGX Deep Learning Server (Pair)</h3>
+                        <div class="price">$93,000 each or $180,000 for the pair</div>
+
+                        <ul class="specs-list">
+                            <li>
+                                <span class="spec-label">GPU:</span>
+                                <span class="spec-value">8x NVIDIA Tesla A100 80GB SXM4 with NVLink</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">CPU:</span>
+                                <span class="spec-value">2x AMD EPYC 7742</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Memory:</span>
+                                <span class="spec-value">2TB DDR4</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Storage:</span>
+                                <span class="spec-value">30TB SSD (2x 1.92TB M.2 NVMe + 8x 3.84TB U.2 NVMe RAID 0)</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Networking:</span>
+                                <span class="spec-value">8x HDR 200Gb/s InfiniBand + Dual Port 10/25/50/100/200GbE NIC</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Power:</span>
+                                <span class="spec-value">4x 1600W PSUs (3200W TDP)</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Form Factor:</span>
+                                <span class="spec-value">8U rack-mounted chassis</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Condition:</span>
+                                <span class="spec-value">Used - Excellent</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Quantity:</span>
+                                <span class="spec-value">2 servers available (sold individually or as pair)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- InfiniBand Switches -->
+            <div class="card">
+                <div class="product-card">
+                    <div class="product-image">
+                        [Product Image Placeholder]
+                    </div>
+                    <div class="product-info">
+                        <div class="badge">NETWORKING</div>
+                        <h3>NVIDIA Quantum HDR InfiniBand Switches (Pair)</h3>
+                        <div class="price">$5,000 each or $9,000 for the pair</div>
+
+                        <ul class="specs-list">
+                            <li>
+                                <span class="spec-label">Model:</span>
+                                <span class="spec-value">Mellanox MQM8700-HS2F</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Ports:</span>
+                                <span class="spec-value">40x QSFP28</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Speed:</span>
+                                <span class="spec-value">HDR InfiniBand (200Gb/s)</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Processor:</span>
+                                <span class="spec-value">x86 dual core</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Power:</span>
+                                <span class="spec-value">2x AC power supplies</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Airflow:</span>
+                                <span class="spec-value">Port-to-CPU (P2C)</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Included:</span>
+                                <span class="spec-value">8x 3m 200G QSFP56 Active Optical Cables (MFS1S00-H003E) per switch</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Quantity:</span>
+                                <span class="spec-value">2 switches available (sold individually or as pair)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Box -->
+            <div class="contact-box" id="contact">
+                <h2>Interested in This Hardware?</h2>
+                <p>Contact us for more details, additional photos, or to schedule an inspection.</p>
+                <a href="mailto:eric@quixi.ai" class="btn btn-primary btn-large">Contact Eric Hartford</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Quixi.AI. All rights reserved.</p>
+            <p style="margin-top: 10px;"><a href="mailto:eric@quixi.ai" style="color: #9ca3af; text-decoration: none;">eric@quixi.ai</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
