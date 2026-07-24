@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hexis is an open-source, local-first cognitive architecture that gives AI assistants persistent memory, identity, goals, and optional Gmail capabilities.">
+  <meta name="theme-color" content="#0b1020">
+  <title>Hexis — Open-source, local-first AI memory and identity</title>
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --panel: #11182b;
+      --panel-2: #151e35;
+      --text: #f5f7ff;
+      --muted: #b8c1dc;
+      --line: #293552;
+      --accent: #91a7ff;
+      --accent-2: #71dfc1;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(145,167,255,.18), transparent 32rem),
+        radial-gradient(circle at 90% 15%, rgba(113,223,193,.12), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(10,15,30,.86);
+      backdrop-filter: blur(14px);
+    }
+    nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { font-weight: 800; letter-spacing: .02em; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+    .nav-links a:hover { color: var(--text); }
+    main { overflow: hidden; }
+    .hero {
+      padding: 104px 0 76px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--accent-2);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    h1 {
+      margin: 14px 0 20px;
+      max-width: 820px;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+    .lead {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .button.primary {
+      color: #08111e;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+    .hero-card, .card, .data-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      box-shadow: 0 22px 70px rgba(0,0,0,.22);
+    }
+    .hero-card { padding: 28px; }
+    .hero-card h2 { margin-top: 0; font-size: 1.2rem; }
+    .checklist { padding: 0; margin: 18px 0 0; list-style: none; }
+    .checklist li {
+      position: relative;
+      padding: 12px 0 12px 30px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 2px;
+      color: var(--accent-2);
+      font-weight: 900;
+    }
+    section { padding: 76px 0; }
+    .section-heading { max-width: 760px; margin-bottom: 34px; }
+    h2 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: -.035em; }
+    h3 { margin: 0 0 8px; }
+    .muted, .section-heading p, .card p, .data-box p { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card { padding: 24px; }
+    .card p { margin-bottom: 0; }
+    .data-box {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 34px;
+      align-items: start;
+    }
+    .data-list { margin: 0; padding-left: 20px; color: var(--muted); }
+    .data-list li { margin: 10px 0; }
+    code {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      background: #080d18;
+      color: #dce5ff;
+    }
+    .notice {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent-2);
+      background: rgba(113,223,193,.08);
+      color: var(--muted);
+    }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 34px 0 50px;
+      color: var(--muted);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    @media (max-width: 820px) {
+      .hero, .data-box { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 76px; }
+      .nav-links a:not(.button) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top">HEXIS</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#gmail">Gmail access</a>
+          <a href="hexis-privacy.html">Privacy</a>
+          <a class="button" href="https://github.com/QuixiAI/Hexis" rel="noopener noreferrer">View source</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Open source · Local first · MIT licensed</div>
+          <h1>Memory, identity, and the shape of becoming.</h1>
+          <p class="lead">
+            Hexis is a Postgres-native cognitive architecture that wraps an AI model
+            with persistent memory, beliefs, identity, goals, and autonomous behavior.
+            You run it on your own computer, and you control its data and integrations.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/QuixiAI/Hexis" rel="noopener noreferrer">Get Hexis on GitHub</a>
+            <a class="button" href="#gmail">How Gmail access works</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Hexis at a glance">
+          <h2>Hexis at a glance</h2>
+          <ul class="checklist">
+            <li>Runs locally as open-source software</li>
+            <li>Uses PostgreSQL as the system of record</li>
+            <li>Supports multiple AI model providers</li>
+            <li>Stores persistent memory and identity</li>
+            <li>Connects to external services only when configured</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">What it does</div>
+          <h2>A cognitive layer around the model you choose.</h2>
+          <p>
+            Hexis provides continuity across sessions rather than treating every
+            conversation as a blank slate.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>Persistent memory</h3>
+            <p>Episodic, semantic, procedural, strategic, and working memory live in PostgreSQL alongside their supporting evidence.</p>
+          </article>
+          <article class="card">
+            <h3>Identity and goals</h3>
+            <p>Values, beliefs, boundaries, emotional state, goals, and an autonomous heartbeat can persist over time.</p>
+          </article>
+          <article class="card">
+            <h3>Auditable behavior</h3>
+            <p>Memory changes and belief revisions can be traced, and unsupported action claims are visibly corrected.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gmail">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Google user data</div>
+          <h2>How Hexis uses Gmail access</h2>
+          <p>
+            Gmail is an optional integration. Hexis requests access only after the
+            user deliberately chooses to connect a Google account and approves the
+            permissions shown by Google.
+          </p>
+        </div>
+
+        <div class="data-box">
+          <div>
+            <h3>Purpose of access</h3>
+            <p>
+              Depending on the capabilities enabled by the user, Hexis may use Gmail
+              permissions to search and read messages, send messages, and organize
+              mail with actions such as labeling, archiving, or moving messages to trash.
+            </p>
+            <p>
+              Hexis does not receive Gmail access merely because it is installed.
+              Google issues authorization only after the user signs in and grants consent.
+            </p>
+          </div>
+          <div>
+            <h3>Data handling</h3>
+            <ul class="data-list">
+              <li><strong>User control:</strong> the user chooses whether to connect Gmail and may revoke access through Hexis or their Google Account.</li>
+              <li><strong>Local-first operation:</strong> credentials and application state are intended to be stored by the user's own Hexis installation, not in the public source repository.</li>
+              <li><strong>No advertising use:</strong> Google user data is not used for advertising or sold to third parties.</li>
+              <li><strong>Configured processors:</strong> content the user asks Hexis to analyze may be sent to the AI provider or other service the user has configured. Those services have their own terms and privacy practices.</li>
+              <li><strong>Least privilege:</strong> Hexis should request only the permissions required for the Gmail features the user enables.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notice">
+          For the complete disclosure of how Google user data is accessed, used,
+          stored, shared, retained, and deleted, read the
+          <a href="hexis-privacy.html"><strong>Hexis Privacy Policy</strong></a>.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Open development</div>
+          <h2>Inspect it, run it, change it.</h2>
+          <p>
+            Hexis is distributed under the MIT License. Its source code, issue tracker,
+            and development history are publicly available through the QuixiAI GitHub organization.
+          </p>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/QuixiAI/Hexis" rel="noopener noreferrer">Open the repository</a>
+          <a class="button" href="https://github.com/QuixiAI/Hexis/issues" rel="noopener noreferrer">Report an issue</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>Hexis · An open-source project by QuixiAI</div>
+      <div class="footer-links">
+        <a href="hexis-privacy.html">Privacy Policy</a>
+        <a href="https://github.com/QuixiAI/Hexis" rel="noopener noreferrer">Source code</a>
+        <a href="mailto:privacy@quixi.ai">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
