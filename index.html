@@ -3,517 +3,519 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quixi.AI - Democratizing AI Through Open Research</title>
+    <title>Quixi.AI — Intelligence You Own</title>
+    <meta name="description" content="Quixi.AI is Eric Hartford's independent AI lab: an eclectic on-prem homelab, the QuixiCore kernel library, the SlimServe inference engine, the Hexis cognitive architecture, the With programming language, the game WIPE, and a book on local and on-prem AI.">
+    <meta property="og:title" content="Quixi.AI — Intelligence You Own">
+    <meta property="og:description" content="An independent AI lab building the whole private-AI stack, from silicon to self.">
+    <meta property="og:image" content="https://quixi.ai/media/wipe-poster.jpg">
+    <meta name="theme-color" content="#06070c">
     <style>
-        /* Reset - Make all elements behave predictably */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #06070c;
+            --bg-2: #0b0d16;
+            --panel: #0f1220;
+            --line: #1c2238;
+            --line-2: #2a3252;
+            --text: #e7e9f3;
+            --muted: #8a91ab;
+            --dim: #5b627c;
+            --primary: #8B5CF6;
+            --primary-2: #a78bfa;
+            --grid: #2f5bff;
+            --lime: #b6ff3b;
+            --magenta: #ff3bd4;
+            --cyan: #3be8ff;
+            --amber: #ffb23b;
+            --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --radius: 14px;
+            --max: 1180px;
         }
-        
-        /* Basic styles for the whole page */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
             line-height: 1.6;
-            color: #333;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        
-        /* Container to center content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        a { color: inherit; text-decoration: none; }
+        img, video { display: block; max-width: 100%; }
+        ::selection { background: var(--primary); color: #fff; }
+
+        .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+        .mono { font-family: var(--mono); }
+        .kicker {
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--primary-2);
         }
-        
-        /* Button styles */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-        
-        .btn-primary {
-            background: #7c3aed;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #6d28d9;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #e5e5e5;
-            color: #333;
-        }
-        
-        .btn-outline:hover {
-            background: #f5f5f4;
-        }
-        
-        /* Card style for boxes */
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        /* Header styles */
+
+        /* ---------- Header ---------- */
         header {
-            background: white;
-            border-bottom: 1px solid #e5e5e5;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: fixed; inset: 0 0 auto 0; z-index: 50;
+            background: rgba(6, 7, 12, .72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,.05);
         }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #333;
-        }
-        
+        .header-content { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; }
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: #7c3aed;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-right: 10px;
+            width: 30px; height: 30px; border-radius: 8px;
+            display: grid; place-items: center;
+            font-family: var(--mono); font-weight: 800; font-size: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--magenta));
+            box-shadow: 0 0 24px rgba(139, 92, 246, .45);
         }
-        
-        /* Navigation */
-        nav {
-            display: flex;
-            gap: 30px;
+        nav { display: flex; gap: 28px; align-items: center; }
+        nav a { font-size: 14px; color: var(--muted); transition: color .2s; }
+        nav a:hover { color: var(--text); }
+        nav a.nav-cta {
+            color: var(--text); padding: 7px 14px; border-radius: 999px;
+            border: 1px solid var(--line-2);
         }
-        
-        nav a {
-            text-decoration: none;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        nav a:hover {
-            color: #7c3aed;
-        }
-        
-        /* Mobile menu */
+        nav a.nav-cta:hover { border-color: var(--primary); }
         .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
+            display: none; background: none; border: 1px solid var(--line-2); color: var(--text);
+            width: 40px; height: 40px; border-radius: 10px; font-size: 18px; cursor: pointer;
         }
-        
-        /* Hero section */
+        .mobile-menu { display: none; flex-direction: column; padding: 8px 0 18px; }
+        .mobile-menu a { padding: 10px 0; color: var(--muted); border-top: 1px solid var(--line); }
+        .mobile-menu.active { display: flex; }
+
+        /* ---------- Hero ---------- */
         .hero {
-            background: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
-            padding: 80px 0;
-        }
-        
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-        
-        .hero h1 .highlight {
-            color: #7c3aed;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .hero-image {
-            background: #ddd;
-            height: 400px;
-            border-radius: 10px;
             position: relative;
+            min-height: 100vh; min-height: 100svh;
+            display: flex; align-items: center;
+            padding: 120px 0 80px;
             overflow: hidden;
         }
-        
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        #grid-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .hero::after {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 60% 50% at 30% 45%, rgba(6,7,12,.85), transparent 70%),
+                linear-gradient(to bottom, transparent 70%, var(--bg));
         }
-        
-        .hero-image-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
+        .hero-content { position: relative; z-index: 2; max-width: 760px; }
+        .hero h1 {
+            font-size: clamp(44px, 7.4vw, 92px);
+            line-height: .98;
+            letter-spacing: -.035em;
+            font-weight: 800;
+            margin: 22px 0 26px;
         }
-        
-        /* Sections */
-        .section {
-            padding: 80px 0;
+        .hero h1 .grad {
+            background: linear-gradient(92deg, var(--primary-2) 0%, var(--magenta) 55%, var(--amber) 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-        
-        .section:nth-child(even) {
-            background: #f5f5f4;
+        .hero p.lead { font-size: clamp(17px, 2vw, 20px); color: #b9bed2; max-width: 620px; }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 36px; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 13px 22px; border-radius: 999px;
+            font-weight: 600; font-size: 15px;
+            transition: transform .2s, box-shadow .2s, border-color .2s, background .2s;
         }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 30px rgba(139,92,246,.35); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(139,92,246,.5); }
+        .btn-ghost { border: 1px solid var(--line-2); color: var(--text); background: rgba(15,18,32,.6); }
+        .btn-ghost:hover { border-color: var(--primary-2); transform: translateY(-2px); }
+
+        .now {
+            margin-top: 48px;
+            display: flex; flex-wrap: wrap; gap: 10px 22px;
+            font-family: var(--mono); font-size: 12.5px; color: var(--muted);
         }
-        
+        .now span { display: inline-flex; align-items: center; gap: 8px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); animation: blink 2.4s infinite; }
+        .dot.m { background: var(--magenta); box-shadow: 0 0 10px var(--magenta); animation-delay: .8s; }
+        .dot.c { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); animation-delay: 1.6s; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+        .hint {
+            position: absolute; right: 24px; bottom: 28px; z-index: 2;
+            font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: .1em;
+        }
+
+        /* ---------- Sections ---------- */
+        section.section { padding: 120px 0; position: relative; }
+        .section-header { max-width: 720px; margin-bottom: 56px; }
         .section-header h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: clamp(32px, 4.6vw, 52px);
+            line-height: 1.05; letter-spacing: -.03em; font-weight: 800;
+            margin-top: 14px;
         }
-        
-        .section-header p {
-            font-size: 20px;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
+        .section-header p { color: var(--muted); font-size: 18px; margin-top: 18px; }
+
+        /* ---------- The Stack ---------- */
+        .stack { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+        .layers { display: flex; flex-direction: column; gap: 10px; }
+        .layer {
+            display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 24px;
+            padding: 22px 26px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            position: relative; overflow: hidden;
+            transition: border-color .25s, transform .25s;
         }
-        
-        /* Grid layouts */
-        .grid {
-            display: grid;
-            gap: 30px;
+        .layer::before {
+            content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+            background: var(--accent, var(--primary));
+            box-shadow: 0 0 18px var(--accent, var(--primary));
         }
-        
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        }
-        
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        
-        /* Feature card */
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .tech-specs {
-            font-size: 14px;
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 6px;
-            border-left: 3px solid #7c3aed;
-            margin: 15px 0;
-        }
-        
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: #ede9fe;
-            color: #7c3aed;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        .metric-value {
-            font-size: 24px;
-            font-weight: bold;
-            display: block;
-        }
-        
-        .metric-label {
-            font-size: 12px;
-            color: #666;
-        }
-        
-        /* Testimonial */
-        .testimonial-card {
-            background: white;
-        }
-        
-        .quote {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-        
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 48px;
-            height: 48px;
-            background: #f5f5f4;
-            border-radius: 50%;
-        }
-        
-        .author-info h4 {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .author-info p {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .pub-meta {
-            color: #7c3aed;
-            font-size: 14px;
-            margin: 10px 0;
-            font-weight: 500;
-        }
-        
-        /* Pricing */
-        .pricing-card h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .price {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .price span {
-            font-size: 16px;
-            font-weight: normal;
-            color: #666;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-        
-        .pricing-features li {
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .check {
-            color: #10b981;
-            font-size: 20px;
-        }
-        
-        .popular {
-            border: 2px solid #7c3aed;
+        .layer:hover { border-color: var(--line-2); transform: translateX(6px); }
+        .layer .tier { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--dim); }
+        .layer .tier b { display: block; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .12em; margin-top: 2px; }
+        .layer h3 { font-size: 21px; letter-spacing: -.01em; }
+        .layer p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+        .layer .go { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+        .layer:hover .go { color: var(--text); }
+        .side { display: flex; flex-direction: column; gap: 10px; }
+        .side .layer { grid-template-columns: 1fr; gap: 8px; flex: 1; align-content: start; }
+        .side .layer:hover { transform: translateY(-4px); }
+
+        /* ---------- Feature blocks ---------- */
+        .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .feature + .feature { margin-top: 140px; }
+        .feature > *, .stack > *, .lab > *, .book > *, .affine > *, .about > * { min-width: 0; }
+        .feature.flip > :first-child { order: 2; }
+        .feature h3 { font-size: clamp(30px, 3.6vw, 42px); letter-spacing: -.03em; line-height: 1.08; margin: 12px 0 18px; }
+        .feature p { color: #aeb4c9; font-size: 17px; }
+        .feature p + p { margin-top: 14px; }
+        .feature .links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 28px; font-family: var(--mono); font-size: 14px; }
+        .feature .links a { color: var(--primary-2); border-bottom: 1px solid transparent; transition: border-color .2s; }
+        .feature .links a:hover { border-color: var(--primary-2); }
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 28px;
             position: relative;
         }
-        
-        .popular-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #7c3aed;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
+        .panel-title { font-family: var(--mono); font-size: 12px; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; display: flex; justify-content: space-between; }
+
+        /* bars */
+        .bar-row { margin-bottom: 18px; }
+        .bar-row:last-child { margin-bottom: 0; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 7px; }
+        .bar-label span:last-child { font-family: var(--mono); color: var(--text); font-weight: 600; }
+        .bar-label small { color: var(--dim); font-size: 12.5px; display: block; }
+        .bar { height: 10px; background: #151a2c; border-radius: 99px; overflow: hidden; }
+        .bar i {
+            display: block; height: 100%; width: 0; border-radius: 99px;
+            background: linear-gradient(90deg, var(--primary), var(--c, var(--magenta)));
+            box-shadow: 0 0 14px var(--c, var(--magenta));
+            transition: width 1.6s cubic-bezier(.2, .8, .2, 1);
         }
-        
-        /* CTA Section */
-        .cta {
-            background: #4c1d95;
-            color: white;
-            padding: 80px 0;
+        .in .bar i { width: var(--w); }
+        .foot-note { color: var(--dim); font-size: 12.5px; margin-top: 20px; line-height: 1.5; }
+
+        /* chips */
+        .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .chip {
+            border: 1px solid var(--line-2); border-radius: 10px; padding: 16px 14px;
+            font-family: var(--mono); font-size: 14px; background: #0c0f1b;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .chip small { display: block; color: var(--dim); font-size: 11.5px; margin-top: 4px; }
+        .chip:hover { border-color: var(--c); box-shadow: 0 0 22px -6px var(--c); }
+        .chip b { color: var(--c); font-weight: 600; }
+        .motto { margin-top: 22px; font-family: var(--mono); font-size: 13px; color: var(--muted); text-align: center; letter-spacing: .04em; }
+
+        /* code */
+        pre.code {
+            font-family: var(--mono); font-size: 14px; line-height: 1.7;
+            background: #0a0c16; border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 24px 26px; overflow-x: auto; color: #cfd3e4;
+        }
+        .code .k { color: var(--magenta); }
+        .code .s { color: var(--lime); }
+        .code .f { color: var(--cyan); }
+        .code .c { color: var(--dim); }
+        .code .r { color: var(--amber); }
+        .term {
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--mono); font-size: 14px;
+            background: #0a0c16; border: 1px solid var(--line); border-radius: 12px;
+            padding: 14px 16px; margin-top: 22px;
+        }
+        .term code { flex: 1; overflow-x: auto; white-space: nowrap; color: #cfd3e4; }
+        .term code::before { content: "$ "; color: var(--lime); }
+        .copy {
+            background: none; border: 1px solid var(--line-2); color: var(--muted); border-radius: 8px;
+            font-family: var(--mono); font-size: 12px; padding: 6px 10px; cursor: pointer;
+        }
+        .copy:hover { color: var(--text); border-color: var(--primary-2); }
+
+        /* Hexis orbit */
+        .orbit { aspect-ratio: 1 / 1; max-width: 440px; margin: 0 auto; position: relative; }
+        .orbit svg { width: 100%; height: 100%; overflow: visible; }
+        .orbit .spin { transform-origin: 220px 220px; animation: spin 60s linear infinite; }
+        .orbit .spin.r { animation-duration: 90s; animation-direction: reverse; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---------- WIPE ---------- */
+        .wipe {
+            padding: 140px 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 0%, rgba(47, 91, 255, .18), transparent 70%),
+                var(--bg);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            position: relative; overflow: hidden;
+        }
+        .wipe::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+            background-image:
+                linear-gradient(rgba(47, 91, 255, .25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(47, 91, 255, .25) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+        }
+        .wipe .container { position: relative; }
+        .wipe-title {
+            font-size: clamp(64px, 13vw, 168px);
+            font-weight: 900; line-height: .85; letter-spacing: -.02em;
             text-align: center;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--cyan);
+            text-shadow: 0 0 40px rgba(59, 232, 255, .35);
+            margin: 14px 0 8px;
         }
-        
-        .cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+        .wipe-sub { text-align: center; font-family: var(--mono); letter-spacing: .5em; color: var(--lime); font-size: 14px; text-shadow: 0 0 12px rgba(182,255,59,.6); }
+        .wipe-tag { text-align: center; color: #aeb4c9; font-size: 18px; max-width: 640px; margin: 26px auto 48px; }
+        .video-frame {
+            position: relative; border-radius: 18px; padding: 2px;
+            background: linear-gradient(135deg, var(--cyan), var(--grid) 40%, var(--magenta) 80%, var(--lime));
+            box-shadow: 0 0 80px -10px rgba(47, 91, 255, .55), 0 0 140px -30px rgba(255, 59, 212, .45);
         }
-        
-        .cta p {
-            font-size: 20px;
-            margin-bottom: 40px;
-            opacity: 0.8;
+        .video-frame video { width: 100%; border-radius: 16px; background: #000; aspect-ratio: 1280 / 832; }
+        .stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 48px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+        .stat { background: var(--bg-2); padding: 22px 12px; text-align: center; }
+        .stat b { display: block; font-family: var(--mono); font-size: 30px; color: var(--c, var(--cyan)); text-shadow: 0 0 16px var(--c, var(--cyan)); line-height: 1.1; }
+        .stat span { font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+        .wipe-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
+
+        /* ---------- Homelab rack ---------- */
+        .lab { display: grid; grid-template-columns: 420px 1fr; gap: 64px; align-items: start; }
+        .rack {
+            background: linear-gradient(#11131d, #0b0c13);
+            border: 1px solid var(--line-2);
+            border-radius: 12px;
+            padding: 16px 22px;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(0,0,0,.6), 0 30px 80px -30px rgba(139,92,246,.35);
         }
-        
-        .stats-box {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 40px;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .rack::before, .rack::after {
+            content: ""; position: absolute; top: 12px; bottom: 12px; width: 8px;
+            background: repeating-linear-gradient(to bottom, #2a2f45 0 3px, transparent 3px 14px);
         }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+        .rack::before { left: 7px; }
+        .rack::after { right: 7px; }
+        .unit {
+            display: flex; align-items: center; gap: 12px;
+            height: var(--h, 44px);
+            margin: 5px 0;
+            padding: 0 14px;
+            border-radius: 5px;
+            background: linear-gradient(#1b1f2e, #141725);
+            border: 1px solid #262b40;
+            font-family: var(--mono); font-size: 12px; color: #aab0c6;
+            cursor: default;
+            transition: border-color .2s, background .2s;
         }
-        
-        .stat-value {
-            font-size: 36px;
-            font-weight: bold;
-            display: block;
+        .unit:hover, .unit.hl { border-color: var(--c); background: linear-gradient(#20253a, #171b2c); }
+        .unit .leds { display: flex; gap: 5px; margin-left: auto; }
+        .unit .leds i { width: 5px; height: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 6px var(--c); animation: led 1.3s infinite steps(2); }
+        .unit .leds i:nth-child(2) { animation-duration: .9s; }
+        .unit .leds i:nth-child(3) { animation-duration: 1.7s; }
+        @keyframes led { 50% { opacity: .2; } }
+        .unit .vents { width: 46px; height: 60%; background: repeating-linear-gradient(90deg, #0a0b12 0 2px, transparent 2px 5px); border-radius: 2px; opacity: .8; }
+        .unit.blank { background: #0e1019; border-style: dashed; color: var(--dim); justify-content: center; }
+        .manifest { list-style: none; }
+        .manifest li {
+            display: grid; grid-template-columns: 14px 1fr; gap: 14px;
+            padding: 16px 0; border-bottom: 1px solid var(--line);
+            cursor: default;
         }
-        
-        .stat-label {
-            font-size: 14px;
-            opacity: 0.8;
+        .manifest li::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--c); box-shadow: 0 0 10px var(--c); margin-top: 7px; }
+        .manifest b { font-size: 16px; }
+        .manifest span { display: block; color: var(--muted); font-size: 14.5px; }
+        .manifest li.hl b { color: var(--c); }
+
+        /* ---------- Affine ---------- */
+        .affine {
+            display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center;
+            padding: 44px 48px;
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(182, 255, 59, .12), transparent 55%),
+                radial-gradient(ellipse at 100% 100%, rgba(139, 92, 246, .18), transparent 55%),
+                var(--panel);
+            border: 1px solid var(--line-2);
         }
-        
-        /* Footer */
-        footer {
-            background: #111827;
-            color: #9ca3af;
-            padding: 60px 0 30px;
+        .tao {
+            width: 110px; height: 110px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-size: 58px; font-weight: 300; color: var(--lime);
+            border: 1px solid rgba(182,255,59,.35);
+            box-shadow: 0 0 50px -8px rgba(182,255,59,.4), inset 0 0 30px rgba(182,255,59,.08);
         }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            margin-bottom: 40px;
+        .affine h3 { font-size: 30px; letter-spacing: -.02em; margin: 8px 0 10px; }
+        .affine p { color: #aeb4c9; font-size: 16.5px; max-width: 620px; }
+
+        /* ---------- Book ---------- */
+        .book { display: grid; grid-template-columns: 340px 1fr; gap: 72px; align-items: center; }
+        .cover-wrap { perspective: 1400px; }
+        .cover {
+            aspect-ratio: 3 / 4;
+            border-radius: 4px 12px 12px 4px;
+            padding: 34px 30px;
+            display: flex; flex-direction: column;
+            color: #f4f1ea;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(255,178,59,.35), transparent 45%),
+                linear-gradient(160deg, #26184d 0%, #120d26 60%, #0a0716 100%);
+            box-shadow:
+                inset 8px 0 0 rgba(0,0,0,.35),
+                inset 10px 0 12px rgba(255,255,255,.06),
+                30px 40px 80px -20px rgba(0,0,0,.8),
+                0 0 60px -10px rgba(139,92,246,.4);
+            transform: rotateY(-18deg) rotateX(4deg);
+            transition: transform .6s cubic-bezier(.2,.8,.2,1);
+            position: relative; overflow: hidden;
         }
-        
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 20px;
+        .cover-wrap:hover .cover { transform: rotateY(-4deg) rotateX(0); }
+        .cover .ckicker { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--amber); }
+        .cover h4 { font-family: Georgia, "Times New Roman", serif; font-size: 44px; line-height: 1; font-weight: 400; margin-top: 18px; }
+        .cover h4 em { color: var(--amber); }
+        .cover .racklines { margin-top: auto; display: grid; gap: 6px; }
+        .cover .racklines i { height: 8px; border-radius: 2px; background: linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); position: relative; }
+        .cover .racklines i::after { content: ""; position: absolute; right: 8px; top: 2px; width: 4px; height: 4px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 6px var(--lime); }
+        .cover .racklines i:nth-child(3)::after { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+        .cover .author { margin-top: 22px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+        .parts { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 32px; margin-top: 34px; }
+        .part h5 { font-family: var(--mono); font-size: 12px; color: var(--amber); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+        .part ol { list-style: none; counter-reset: none; }
+        .part li { font-size: 15px; color: #c6cadb; padding: 3px 0; display: flex; gap: 10px; }
+        .part li span { font-family: var(--mono); color: var(--dim); font-size: 13px; min-width: 20px; padding-top: 1px; }
+        .quote { border-left: 2px solid var(--amber); padding-left: 18px; margin-top: 22px; font-family: Georgia, serif; font-size: 19px; color: #d9dbe6; font-style: italic; }
+
+        /* ---------- Services ---------- */
+        .services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .service {
+            display: flex; flex-direction: column;
+            padding: 32px;
+            border-radius: 18px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            position: relative; overflow: hidden;
+            transition: border-color .25s, transform .25s;
         }
-        
-        .footer-links {
-            list-style: none;
+        .service::after {
+            content: ""; position: absolute; width: 260px; height: 260px; right: -110px; top: -110px;
+            background: radial-gradient(circle, var(--c), transparent 65%); opacity: .12;
+            transition: opacity .3s;
         }
-        
-        .footer-links li {
-            margin-bottom: 10px;
+        .service:hover { border-color: var(--c); transform: translateY(-4px); }
+        .service:hover::after { opacity: .28; }
+        .service .num { font-family: var(--mono); font-size: 12px; color: var(--c); letter-spacing: .14em; }
+        .service h3 { font-size: 24px; letter-spacing: -.02em; margin: 12px 0 10px; }
+        .service p { color: var(--muted); font-size: 15.5px; }
+        .service ul { list-style: none; margin: 16px 0 24px; }
+        .service li { font-size: 14.5px; color: #b9bed2; padding: 4px 0 4px 20px; position: relative; }
+        .service li::before { content: "▸"; position: absolute; left: 0; color: var(--c); }
+        .service .cta { margin-top: auto; font-family: var(--mono); font-size: 14px; color: var(--text); display: inline-flex; gap: 8px; align-items: center; }
+        .service .cta i { font-style: normal; transition: transform .2s; }
+        .service:hover .cta i { transform: translateX(5px); }
+        .contact-strip {
+            margin-top: 18px; padding: 26px 32px; border-radius: 18px;
+            border: 1px dashed var(--line-2);
+            display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; justify-content: space-between;
         }
-        
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
+        .contact-strip p { color: var(--muted); }
+        .contact-strip a.mail { font-family: var(--mono); font-size: 18px; color: var(--text); }
+
+        /* ---------- About ---------- */
+        .about { display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: center; max-width: 920px; }
+        .avatar {
+            width: 200px; height: 200px; border-radius: 50%; padding: 3px;
+            background: conic-gradient(from 90deg, var(--primary), var(--magenta), var(--amber), var(--lime), var(--cyan), var(--primary));
         }
-        
-        .footer-links a:hover {
-            color: white;
+        .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); }
+        .about h3 { font-size: 32px; letter-spacing: -.02em; }
+        .about .role { font-family: var(--mono); font-size: 13px; color: var(--primary-2); margin: 4px 0 16px; letter-spacing: .06em; }
+        .about p { color: #aeb4c9; font-size: 16.5px; }
+        .about p + p { margin-top: 12px; }
+
+        /* socials */
+        .socials { display: flex; align-items: center; gap: 2px; }
+        .socials a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; color: var(--muted); transition: color .18s, background .18s; }
+        .socials a:hover { color: var(--text); background: var(--panel); }
+        .socials svg { width: 18px; height: 18px; }
+        .about .socials { margin: 18px 0 0 -8px; }
+        .mobile-menu .socials { padding-top: 12px; margin-left: -8px; }
+        @media (max-width: 1100px) { nav .socials { display: none; } }
+
+        /* ---------- Footer ---------- */
+        footer { border-top: 1px solid var(--line); padding: 48px 0 56px; }
+        .footer-content { display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; align-items: center; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 14px; color: var(--muted); }
+        .footer-links a:hover { color: var(--text); }
+        footer .fine { color: var(--dim); font-size: 13px; font-family: var(--mono); }
+
+        /* ---------- Reveal ---------- */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+        .reveal.in { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
         }
-        
-        .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 980px) {
+            .stack, .feature, .lab, .book { grid-template-columns: 1fr; }
+            .feature.flip > :first-child { order: 0; }
+            .feature { gap: 40px; }
+            .feature + .feature { margin-top: 100px; }
+            .side { flex-direction: row; flex-wrap: wrap; }
+            .side .layer { flex: 1 1 220px; }
+            .lab { gap: 40px; }
+            .rack { max-width: 460px; }
+            .book { gap: 48px; }
+            .cover-wrap { max-width: 300px; }
+            .stats { grid-template-columns: repeat(3, 1fr); }
         }
-        
-        /* Mobile styles */
         @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-        
-        /* Mobile menu dropdown */
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-top: 1px solid #e5e5e5;
-            padding: 20px;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu a {
-            display: block;
-            padding: 10px 0;
-            color: #666;
-            text-decoration: none;
+            nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            section.section { padding: 88px 0; }
+            .container { padding: 0 16px; }
+            .layer { grid-template-columns: 1fr; gap: 6px; padding: 20px; }
+            .layer .go { justify-self: start; }
+            .services { grid-template-columns: 1fr; }
+            .service { padding: 26px 22px; }
+            .affine { grid-template-columns: 1fr; gap: 22px; padding: 32px 24px; text-align: left; }
+            .tao { width: 80px; height: 80px; font-size: 42px; }
+            .parts { grid-template-columns: 1fr; }
+            .about { grid-template-columns: 1fr; text-align: left; gap: 28px; }
+            .avatar { width: 140px; height: 140px; }
+            .chips { grid-template-columns: repeat(2, 1fr); }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .wipe { padding: 96px 0; }
+            .hint { display: none; }
+            .contact-strip { padding: 22px; }
         }
     </style>
 </head>
@@ -522,160 +524,682 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/" class="logo">
+                <a href="/" class="logo" aria-label="Quixi.AI home">
                     <div class="logo-icon">Q</div>
                     <span>Quixi.AI</span>
                 </a>
-                
-                <nav>
-                    <a href="https://chat.dphn.ai/">Chat with Dolphin</a>
-                    <a href="/chat-samantha.html">Chat with Samantha</a>
-                    <a href="/for-sale.html">Hardware For Sale</a>
-                    <a href="#vision">Vision</a>
-                    <a href="#team">Team</a>
-                    <a href="#contact">Contact</a>
+
+                <nav aria-label="Primary">
+                    <a href="#stack">Stack</a>
+                    <a href="#wipe">WIPE</a>
+                    <a href="#lab">Homelab</a>
+                    <a href="#book">Book</a>
+                    <a href="#about">About</a>
+                    <div class="socials"><a href="https://github.com/QuixiAI" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://x.com/QuixiAI" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a><a href="https://huggingface.co/QuixiAI" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg></a><a href="https://www.linkedin.com/in/ehartford" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://discord.gg/f7u2MRuPSa" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a><a href="https://www.reddit.com/r/withlang/" target="_blank" rel="noopener" aria-label="Reddit" title="Reddit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg></a></div>
+                    <a href="#work" class="nav-cta">Work with me</a>
                 </nav>
-                
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
             </div>
-            
+
             <div class="mobile-menu" id="mobile-menu">
-                <a href="/for-sale.html">Hardware For Sale</a>
-                <a href="#vision">Vision</a>
-                <a href="#team">Team</a>
-                <a href="#contact">Contact</a>
+                <a href="#stack">Stack</a>
+                <a href="#wipe">WIPE</a>
+                <a href="#lab">Homelab</a>
+                <a href="#book">Book</a>
+                <a href="#about">About</a>
+                <a href="#work">Work with me</a>
+                <div class="socials"><a href="https://github.com/QuixiAI" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://x.com/QuixiAI" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a><a href="https://huggingface.co/QuixiAI" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg></a><a href="https://www.linkedin.com/in/ehartford" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://discord.gg/f7u2MRuPSa" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a><a href="https://www.reddit.com/r/withlang/" target="_blank" rel="noopener" aria-label="Reddit" title="Reddit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg></a></div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <main>
+    <!-- Hero -->
+    <section class="hero" aria-label="Introduction">
+        <canvas id="grid-canvas" aria-hidden="true"></canvas>
         <div class="container">
             <div class="hero-content">
-                <div>
-                    <h1>
-                        Building the Future<br>
-                        <span class="highlight">of Artificial Intelligence</span>
-                    </h1>
-                    <p>We're reimagining what's possible with AI.</p>
-                    
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                    </div>
-                    
-                </div>
-                
-                <div class="hero-image">
-                    <img src="/cognitivecomputations.png" alt="Eric Hartford">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section id="vision" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Vision</h2>
-                <p>We're building technology that will fundamentally transform how humanity interacts with artificial intelligence.</p>
-            </div>
-            
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 24px; line-height: 1.8; color: #666; margin-bottom: 40px;">
-                    The next paradigm shift in AI is coming. We're not just improving existing technology – we're reimagining it from first principles.
+                <div class="kicker">Quixi.AI &middot; an independent AI lab &middot; Eric Hartford</div>
+                <h1>Intelligence<br>you <span class="grad">own.</span></h1>
+                <p class="lead">
+                    I build the whole private-AI stack by hand: the metal in my rack, the kernels on that metal,
+                    the engine that serves frontier-class open models, and the mind that remembers who it is.
+                    Along the way I wrote a programming language, then a game in it, and now a book.
                 </p>
-                <p style="font-size: 20px; line-height: 1.6; color: #666;">
-                    Our team is working on breakthrough innovations that will redefine the boundaries of machine intelligence, human-AI collaboration, and the democratization of advanced AI systems.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Team</h2>
-                <p>World-class expertise in artificial intelligence</p>
-            </div>
-            
-            <div style="max-width: 600px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <div style="width: 150px; height: 150px; margin: 0 auto 30px; border-radius: 50%; overflow: hidden; background: #f5f5f4;">
-                        <img src="/headshot.jpeg" alt="Eric Hartford" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h3 style="font-size: 28px; margin-bottom: 10px;">Eric Hartford</h3>
-                    <p style="font-size: 18px; color: #7c3aed; margin-bottom: 20px;">Founder & CEO</p>
-                    <p style="font-size: 16px; line-height: 1.6; color: #666;">
-                        Creator of Huggingface models Dolphin and Samantha.  Former Microsoft, AWS, eBay. Pioneer in open-source AI with millions of downloads worldwide. 
-                        Deep expertise in artificial consciousness and machine learning systems.
-                    </p>
+                <div class="hero-buttons">
+                    <a href="#stack" class="btn btn-primary">Explore the stack ↓</a>
+                    <a href="#work" class="btn btn-ghost">Rent · Train · Consult</a>
+                </div>
+                <div class="now" aria-label="Currently">
+                    <span><i class="dot"></i>competing on Affine &middot; Bittensor</span>
+                    <span><i class="dot m"></i>writing <em>Local and On-Prem AI</em></span>
+                    <span><i class="dot c"></i>shipping SlimServe &amp; QuixiCore</span>
                 </div>
             </div>
         </div>
+        <div class="hint" aria-hidden="true">MOVE THE CURSOR · CLICK TO DETONATE</div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
+    <!-- The Stack -->
+    <section id="stack" class="section">
         <div class="container">
-            <div class="section-header">
-                <h2>Get in Touch</h2>
-                <p>Interested in learning more? We'd love to hear from you.</p>
+            <div class="section-header reveal">
+                <div class="kicker">// the stack</div>
+                <h2>From silicon to self, every layer is mine.</h2>
+                <p>Each project is a layer of one system. Read it bottom-up the way the bytes travel, or jump straight to whatever you came for.</p>
             </div>
-            
-            <div style="max-width: 500px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <p style="font-size: 18px; line-height: 1.6; color: #666; margin-bottom: 30px;">
-                        For partnership inquiries, investment opportunities, or to learn more about our vision for the future of AI.
-                    </p>
-                    <a href="mailto:eric@quixi.ai" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
-                        Contact Us
+
+            <div class="stack">
+                <div class="layers">
+                    <a class="layer reveal" href="#hexis" style="--accent: var(--amber)">
+                        <div class="tier">L4<b>MIND</b></div>
+                        <div><h3>Hexis</h3><p>Postgres-native cognitive architecture: persistent memory, beliefs, identity, and a heartbeat.</p></div>
+                        <div class="go">explore →</div>
+                    </a>
+                    <a class="layer reveal" href="#slimserve" style="--accent: var(--magenta)">
+                        <div class="tier">L3<b>SERVING</b></div>
+                        <div><h3>SlimServe</h3><p>Opinionated inference engine. Frontier-class open models on hardware you own, from tested profiles only.</p></div>
+                        <div class="go">explore →</div>
+                    </a>
+                    <a class="layer reveal" href="#quixicore" style="--accent: var(--primary-2)">
+                        <div class="tier">L2<b>KERNELS</b></div>
+                        <div><h3>QuixiCore</h3><p>Six native kernel libraries (CUDA, Metal, ROCm, XPU, Gaudi, CPU) under one contract.</p></div>
+                        <div class="go">explore →</div>
+                    </a>
+                    <a class="layer reveal" href="#lab" style="--accent: var(--lime)">
+                        <div class="tier">L1<b>METAL</b></div>
+                        <div><h3>The Homelab</h3><p>An eclectic rack of on-prem inference hardware, with silicon from every vendor I write kernels for.</p></div>
+                        <div class="go">explore →</div>
+                    </a>
+                </div>
+                <div class="side">
+                    <a class="layer reveal" href="#with" style="--accent: var(--cyan)">
+                        <div class="tier">LANGUAGE</div>
+                        <h3>With</h3><p>A systems language for native code, built to feel less hostile than the others.</p>
+                    </a>
+                    <a class="layer reveal" href="#wipe" style="--accent: var(--magenta)">
+                        <div class="tier">GAME</div>
+                        <h3>WIPE</h3><p>A neon twin-stick survivor, written in With.</p>
+                    </a>
+                    <a class="layer reveal" href="#book" style="--accent: var(--amber)">
+                        <div class="tier">BOOK</div>
+                        <h3>Local &amp; On-Prem AI</h3><p>The map through the swamp, in progress.</p>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Projects -->
+    <section class="section" style="padding-top: 40px;">
+        <div class="container">
+
+            <!-- SlimServe -->
+            <div class="feature" id="slimserve">
+                <div class="reveal">
+                    <div class="kicker" style="color: var(--magenta)">L3 &middot; Serving</div>
+                    <h3>SlimServe runs frontier models on cards you can buy used.</h3>
+                    <p>
+                        SlimServe is a simplicity-first inference engine for a curated set of open models:
+                        GLM-5.2-Vision, Kimi K3, DeepSeek-V4-Flash, and Qwen3.8. It takes ds4's interface
+                        philosophy, is built on vLLM, and uses every performance trick I can land.
+                    </p>
+                    <p>
+                        Every configuration it will run is a measured profile. It refuses anything else,
+                        so you never find out eight hours into a 244&nbsp;GiB download that the combination doesn't fit.
+                    </p>
+                    <div class="term"><code>slimserve glm52-q2k-2 --serve</code><button class="copy" data-copy="slimserve glm52-q2k-2 --serve">copy</button></div>
+                    <div class="links">
+                        <a href="https://github.com/QuixiAI/SlimServe">github.com/QuixiAI/SlimServe →</a>
+                    </div>
+                </div>
+                <div class="panel reveal" data-bars>
+                    <div class="panel-title"><span>Aggregate throughput</span><span>tok/s</span></div>
+                    <div class="bar-row">
+                        <div class="bar-label"><div>8× RTX 3090 <small>Qwen3.8-Flash-Next · 262K ctx · c32</small></div><span>1,151</span></div>
+                        <div class="bar"><i style="--w: 100%; --c: var(--lime)"></i></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><div>8× A100 <small>GLM-5.2-Vision · c64</small></div><span>626</span></div>
+                        <div class="bar"><i style="--w: 54.4%; --c: var(--magenta)"></i></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><div>8× MI300X <small>GLM-5.2-Vision · c32</small></div><span>607</span></div>
+                        <div class="bar"><i style="--w: 52.7%; --c: var(--cyan)"></i></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label"><div>2× MI300X <small>GLM-5.2-Vision · c64</small></div><span>408</span></div>
+                        <div class="bar"><i style="--w: 35.4%; --c: var(--amber)"></i></div>
+                    </div>
+                    <p class="foot-note">
+                        A 125B-A6B MoE serving its native 262K context at over 1,100 tok/s on eight consumer GeForce cards,
+                        using a custom P2P driver. Methodology differs between model rows; see the SlimServe README.
+                    </p>
+                </div>
+            </div>
+
+            <!-- QuixiCore -->
+            <div class="feature flip" id="quixicore">
+                <div class="reveal">
+                    <div class="kicker">L2 &middot; Kernels</div>
+                    <h3>QuixiCore: native kernels for every accelerator in the room.</h3>
+                    <p>
+                        QuixiCore is one kernel contract with six standalone implementations. CUDA kernels are written
+                        like CUDA kernels, Metal kernels like Metal kernels, and so on down the line. The backends share
+                        the same operations, quant formats, correctness tests, and benchmark method, but no source code.
+                    </p>
+                    <p>
+                        It covers the operations inference actually spends its time in: quantized GEMM and GEMV, MoE routing and
+                        grouped GEMM, paged and MLA attention, speculative decode, and Mamba/SSD. SlimServe's throughput
+                        rests on it.
+                    </p>
+                    <div class="links">
+                        <a href="https://github.com/QuixiAI/QuixiCore">github.com/QuixiAI/QuixiCore →</a>
+                    </div>
+                </div>
+                <div class="panel reveal">
+                    <div class="panel-title"><span>Backends</span><span>contract v0.1</span></div>
+                    <div class="chips">
+                        <a class="chip" style="--c: var(--lime)" href="https://github.com/QuixiAI/QuixiCore-CUDA"><b>CUDA</b><small>NVIDIA Ampere+</small></a>
+                        <a class="chip" style="--c: #d9dde8" href="https://github.com/QuixiAI/QuixiCore-Metal"><b>Metal</b><small>Apple Silicon</small></a>
+                        <a class="chip" style="--c: #ff5a5a" href="https://github.com/QuixiAI/QuixiCore-ROCm"><b>ROCm</b><small>AMD CDNA2–4</small></a>
+                        <a class="chip" style="--c: var(--cyan)" href="https://github.com/QuixiAI/QuixiCore-XPU"><b>XPU</b><small>Intel GPU · SYCL</small></a>
+                        <a class="chip" style="--c: #5aa8ff" href="https://github.com/QuixiAI/QuixiCore-Gaudi"><b>Gaudi</b><small>Intel Gaudi2–3</small></a>
+                        <a class="chip" style="--c: var(--amber)" href="https://github.com/QuixiAI/QuixiCore-CPU"><b>CPU</b><small>x86_64 · aarch64</small></a>
+                    </div>
+                    <div class="motto">Native implementations. Shared contract. No shared code.</div>
+                </div>
+            </div>
+
+            <!-- Hexis -->
+            <div class="feature" id="hexis">
+                <div class="reveal">
+                    <div class="kicker" style="color: var(--amber)">L4 &middot; Mind</div>
+                    <h3>Hexis: memory, identity, and the shape of becoming.</h3>
+                    <p>
+                        Today's LLMs are smart enough. What they lack is continuity. Hexis wraps any model with a mind that lives
+                        inside PostgreSQL: layered memory, beliefs that can say <em>why</em> they changed, drives, an energy
+                        budget, and an autonomous heartbeat that keeps pursuing goals while you're away.
+                    </p>
+                    <p>
+                        It runs locally and your data stays yours. The whole mind exports to a single file you can inspect. The agent consents before
+                        it operates, and it is allowed to refuse.
+                    </p>
+                    <div class="term"><code>curl -LsSf https://quixi.ai/hexis.sh | sh</code><button class="copy" data-copy="curl -LsSf https://quixi.ai/hexis.sh | sh">copy</button></div>
+                    <div class="links">
+                        <a href="/hexis.html">quixi.ai/hexis →</a>
+                        <a href="https://github.com/QuixiAI/Hexis">github.com/QuixiAI/Hexis →</a>
+                    </div>
+                </div>
+                <div class="orbit reveal" aria-hidden="true">
+                    <svg viewBox="0 0 440 440">
+                        <defs>
+                            <radialGradient id="core" cx="50%" cy="50%" r="50%">
+                                <stop offset="0" stop-color="#ffb23b" stop-opacity=".95"/>
+                                <stop offset=".5" stop-color="#ff3bd4" stop-opacity=".35"/>
+                                <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="220" cy="220" r="120" fill="url(#core)"/>
+                        <polygon points="220,172 261.6,196 261.6,244 220,268 178.4,244 178.4,196" fill="none" stroke="#ffb23b" stroke-width="2"/>
+                        <g class="spin">
+                            <circle cx="220" cy="220" r="150" fill="none" stroke="#2a3252" stroke-dasharray="2 8"/>
+                            <circle cx="370" cy="220" r="6" fill="#b6ff3b"/>
+                            <text x="382" y="224" fill="#8a91ab" font-family="monospace" font-size="12">memory</text>
+                            <circle cx="70" cy="220" r="6" fill="#3be8ff"/>
+                            <text x="6" y="206" fill="#8a91ab" font-family="monospace" font-size="12">beliefs</text>
+                        </g>
+                        <g class="spin r">
+                            <circle cx="220" cy="220" r="200" fill="none" stroke="#1c2238"/>
+                            <circle cx="220" cy="20" r="6" fill="#ff3bd4"/>
+                            <text x="232" y="16" fill="#8a91ab" font-family="monospace" font-size="12">identity</text>
+                            <circle cx="220" cy="420" r="6" fill="#a78bfa"/>
+                            <text x="232" y="432" fill="#8a91ab" font-family="monospace" font-size="12">heartbeat</text>
+                            <circle cx="78.6" cy="78.6" r="4" fill="#ffb23b"/>
+                            <text x="20" y="66" fill="#8a91ab" font-family="monospace" font-size="12">goals</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- With -->
+            <div class="feature flip" id="with">
+                <div class="reveal">
+                    <div class="kicker" style="color: var(--cyan)">Language</div>
+                    <h3>With: a systems language that doesn't fight you.</h3>
+                    <p>
+                        With compiles to native code through LLVM, with no interpreter and no GC pauses. Ownership-based memory safety
+                        rules out use-after-free, double-free, and data races, and you never write a lifetime annotation.
+                    </p>
+                    <p>
+                        It uses indentation for scope, type inference, f-strings, first-class regex, <code class="mono">let … else</code>,
+                        scoped <code class="mono">with</code> blocks, and direct C interop. The compiler is self-hosting, with CI on Linux, macOS, and Windows
+                        for both x86_64 and arm64.
+                    </p>
+                    <div class="term"><code>curl -fsSL https://withlang.org/installer/install.sh | sh</code><button class="copy" data-copy="curl -fsSL https://withlang.org/installer/install.sh | sh">copy</button></div>
+                    <div class="links">
+                        <a href="https://withlang.org">withlang.org →</a>
+                        <a href="https://github.com/withlang-dev/with">github.com/withlang-dev/with →</a>
+                    </div>
+                </div>
+                <div class="reveal">
+<pre class="code"><span class="c"># grep, but pleasant</span>
+<span class="k">var</span> nr = <span class="r">0</span>
+<span class="k">for</span> line <span class="k">in</span> file.<span class="f">read_lines</span>(<span class="s">"server.log"</span>):
+    nr += <span class="r">1</span>
+    <span class="k">if</span> line =~ <span class="r">/error (\d+)/</span>:
+        <span class="f">print</span>(<span class="s">f"{nr}: {line}"</span>)
+
+<span class="k">fn</span> <span class="f">handle</span>(req: Request) -> Response:
+    <span class="k">let</span> user = db.<span class="f">find_user</span>(req.params.id) <span class="k">else</span>:
+        <span class="k">return</span> Response.<span class="f">not_found</span>()
+    Response.<span class="f">json</span>(user)
+
+<span class="k">let</span> config = <span class="k">with</span> Config.<span class="f">default</span>() <span class="k">as mut</span> c:
+    c.timeout = <span class="r">30</span>
+    c.retries = <span class="r">3</span></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WIPE -->
+    <section id="wipe" class="wipe">
+        <div class="container">
+            <div class="kicker reveal" style="text-align: center; color: var(--cyan)">A game written in With</div>
+            <div class="wipe-title reveal" aria-label="WIPE">WIPE</div>
+            <div class="wipe-sub reveal">SURVIVAL</div>
+            <p class="wipe-tag reveal">
+                The feel of Geometry Wars on the loop of Vampire Survivors. Luminous wireframes sit on a blue lattice that warps around every
+                bullet and blast, with two-tier bloom, line-spark explosions, and a bass-led ambient house soundtrack. Native With and raylib.
+            </p>
+            <div class="video-frame reveal">
+                <video id="wipe-video" controls muted loop playsinline preload="none" poster="/media/wipe-poster.jpg">
+                    <source src="/media/wipe-gameplay.mp4" type="video/mp4">
+                    Your browser can't play this video. <a href="/media/wipe-gameplay.mp4">Download the WIPE gameplay clip</a>.
+                </video>
+            </div>
+            <div class="stats reveal">
+                <div class="stat" style="--c: var(--cyan)"><b>20</b><span>minute runs</span></div>
+                <div class="stat" style="--c: var(--lime)"><b>8</b><span>weapons</span></div>
+                <div class="stat" style="--c: var(--magenta)"><b>14</b><span>passives</span></div>
+                <div class="stat" style="--c: var(--amber)"><b>12</b><span>merges</span></div>
+                <div class="stat" style="--c: var(--primary-2)"><b>9</b><span>ships</span></div>
+                <div class="stat" style="--c: var(--cyan)"><b>3</b><span>bosses + the Null</span></div>
+            </div>
+            <div class="wipe-links reveal">
+                <a class="btn btn-ghost" href="https://github.com/withlang-dev/wipe">Build it from source →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Homelab -->
+    <section id="lab" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="kicker" style="color: var(--lime)">L1 &middot; Metal</div>
+                <h2>The homelab: eclectic on purpose.</h2>
+                <p>
+                    Most labs standardize on one vendor. Mine collects them. When QuixiCore claims a kernel works on
+                    CUDA, ROCm, Metal, XPU, or a plain CPU, the claim was measured on real silicon on premises, not taken from a spec sheet.
+                    The same machines are available for <a href="#work" style="color: var(--lime)">private rental</a>.
+                </p>
+            </div>
+            <div class="lab">
+                <div class="rack reveal" aria-hidden="true">
+                    <div class="unit blank" style="--h: 26px">— patch / fabric —</div>
+                    <div class="unit" data-k="ib" style="--c: var(--cyan); --h: 30px"><span class="vents"></span>HDR IB<span class="leds"><i></i><i></i><i></i></span></div>
+                    <div class="unit" data-k="mi300" style="--c: #ff3b5c; --h: 96px"><span class="vents"></span>Instinct MI300X<span class="leds"><i></i><i></i><i></i></span></div>
+                    <div class="unit" data-k="3090" style="--c: var(--lime); --h: 96px"><span class="vents"></span>8× RTX 3090 · P2P<span class="leds"><i></i><i></i><i></i></span></div>
+                    <div class="unit" data-k="a100" style="--c: #76b900; --h: 76px"><span class="vents"></span>A100 SXM4<span class="leds"><i></i><i></i><i></i></span></div>
+                    <div class="unit" data-k="mi" style="--c: #ff5a5a; --h: 60px"><span class="vents"></span>Instinct MI210<span class="leds"><i></i><i></i><i></i></span></div>
+                    <div class="unit" data-k="arc" style="--c: var(--cyan); --h: 44px"><span class="vents"></span>Arc Pro B60<span class="leds"><i></i><i></i></span></div>
+                    <div class="unit" data-k="spr" style="--c: var(--amber); --h: 44px"><span class="vents"></span>Xeon SPR<span class="leds"><i></i><i></i></span></div>
+                    <div class="unit" data-k="mac" style="--c: #d9dde8; --h: 44px"><span class="vents"></span>M5 Max · M4 Max<span class="leds"><i></i></span></div>
+                </div>
+                <ul class="manifest reveal">
+                    <li data-k="mi300" style="--c: #ff3b5c"><div><b>AMD Instinct MI300X</b><span>192&nbsp;GB of HBM3 per GPU. The CDNA3 flagship for QuixiCore-ROCm's hand-tuned gfx942 kernels, and where SlimServe serves GLM-5.2-Vision with up to a million tokens of context.</span></div></li>
+                    <li data-k="3090" style="--c: var(--lime)"><div><b>8× GeForce RTX 3090</b><span>Consumer cards with a custom peer-to-peer driver (32&nbsp;GiB BAR1). This rig holds SlimServe's record of 1,151 tok/s.</span></div></li>
+                    <li data-k="a100" style="--c: #76b900"><div><b>NVIDIA A100 80GB SXM4</b><span>The NVLink reference platform for the CUDA backend and the A100 serving profiles.</span></div></li>
+                    <li data-k="mi" style="--c: #ff5a5a"><div><b>AMD Instinct MI210</b><span>CDNA2 target for QuixiCore-ROCm, keeping the backend honest on the generation before MI300X.</span></div></li>
+                    <li data-k="arc" style="--c: var(--cyan)"><div><b>Intel Arc Pro B60</b><span>Development hardware for the XPU/SYCL backend.</span></div></li>
+                    <li data-k="spr" style="--c: var(--amber)"><div><b>Intel Xeon Sapphire Rapids</b><span>AMX and AVX-512 host for QuixiCore-CPU and host-offloaded KV.</span></div></li>
+                    <li data-k="mac" style="--c: #d9dde8"><div><b>Apple M5 Max &amp; M4 Max</b><span>Unified memory, Metal kernels, and SlimServe's Apple Silicon profiles.</span></div></li>
+                    <li data-k="ib" style="--c: var(--cyan)"><div><b>Quantum HDR InfiniBand</b><span>The fabric that connects the boxes when a model outgrows one of them.</span></div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affine -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="affine reveal">
+                <div class="tao" aria-hidden="true">τ</div>
+                <div>
+                    <div class="kicker" style="color: var(--lime)">Now &middot; decentralized</div>
+                    <h3>Working on Affine, a Bittensor subnet.</h3>
+                    <p>
+                        Affine is an open arena where models are trained and ranked against verifiable reasoning environments,
+                        and the rewards follow real capability rather than claims. I put the full stack to work there.
+                        The homelab trains, SlimServe serves, and the results speak for themselves.
+                    </p>
+                </div>
+                <a class="btn btn-ghost" href="https://bittensor.com">Bittensor →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book -->
+    <section id="book" class="section" style="background: linear-gradient(to bottom, var(--bg), var(--bg-2) 30%, var(--bg-2) 70%, var(--bg));">
+        <div class="container">
+            <div class="book">
+                <div class="cover-wrap reveal">
+                    <div class="cover">
+                        <div class="ckicker">A book in progress</div>
+                        <h4>Local &amp;<br><em>On-Prem</em><br>AI</h4>
+                        <div class="racklines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                        <div class="author">Eric Hartford</div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="kicker" style="color: var(--amber)">The book</div>
+                    <h2 style="font-size: clamp(32px, 4.6vw, 52px); line-height: 1.05; letter-spacing: -.03em; margin-top: 14px;">A map through the swamp.</h2>
+                    <p style="color: #aeb4c9; font-size: 17px; margin-top: 18px;">
+                        There is a swamp between "it's possible to run AI on your own hardware" and "my team uses private AI every day."
+                        It's full of GPU drivers, gateways, embedding indexes, Compose files, and pages at 2&nbsp;a.m. This book goes theory first,
+                        then hardware from a $3,500 workstation up to a full rack, then the complete open-source stack built by hand.
+                    </p>
+                    <p class="quote">The people who own the data should own the intelligence that runs on it.</p>
+                    <div class="parts">
+                        <div class="part"><h5>I · Foundations</h5><ol>
+                            <li><span>01</span>Why own your AI?</li>
+                            <li><span>02</span>How inference actually works</li>
+                        </ol></div>
+                        <div class="part"><h5>II · Hardware</h5><ol>
+                            <li><span>03</span>Choosing and building AI hardware</li>
+                            <li><span>04</span>Servers, racks, and cooling</li>
+                            <li><span>05</span>Preparing the host</li>
+                        </ol></div>
+                        <div class="part"><h5>III · The Stack</h5><ol>
+                            <li><span>06</span>Choosing your models</li>
+                            <li><span>07</span>Serving language models</li>
+                            <li><span>08</span>Building the shared AI service</li>
+                            <li><span>09</span>Beyond text: images and voice</li>
+                            <li><span>10</span>Workspaces and agents</li>
+                        </ol></div>
+                        <div class="part"><h5>IV · Operations</h5><ol>
+                            <li><span>11</span>Operating private AI</li>
+                            <li><span>12</span>SovereignStack: from appliance to fleet</li>
+                        </ol></div>
+                    </div>
+                    <div class="links" style="margin-top: 30px; font-family: var(--mono); font-size: 14px;">
+                        <a href="mailto:eric@quixi.ai?subject=Local%20and%20On-Prem%20AI%20%E2%80%94%20notify%20me" style="color: var(--amber);">Tell me when it ships →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="work" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="kicker">// work with me</div>
+                <h2>Bring me a hard problem.</h2>
+                <p>I take on a small number of engagements. Each one gets the same hardware, kernels, and judgment that went into everything above.</p>
+            </div>
+            <div class="services">
+                <a class="service reveal" style="--c: var(--lime)" href="mailto:eric@quixi.ai?subject=Private%20server%20rental">
+                    <div class="num">01 · RENT</div>
+                    <h3>Private server rental</h3>
+                    <p>Dedicated bare-metal machines from the lab. No noisy neighbors and no third-party cloud.</p>
+                    <ul>
+                        <li>NVIDIA, AMD, and Intel accelerators</li>
+                        <li>Pre-tuned SlimServe endpoints, or root access</li>
+                        <li>Your data stays in one room with one operator</li>
+                    </ul>
+                    <span class="cta">Ask about availability <i>→</i></span>
+                </a>
+                <a class="service reveal" style="--c: var(--magenta)" href="mailto:eric@quixi.ai?subject=Boutique%20model%20training%20commission">
+                    <div class="num">02 · TRAIN</div>
+                    <h3>Boutique model training</h3>
+                    <p>Commissioned fine-tunes and custom models from the creator of Dolphin and Samantha.</p>
+                    <ul>
+                        <li>Persona, alignment, and domain specialists</li>
+                        <li>Uncensored or tightly governed, whichever you need</li>
+                        <li>Delivered with weights, evals, and quants that serve</li>
+                    </ul>
+                    <span class="cta">Commission a model <i>→</i></span>
+                </a>
+                <a class="service reveal" style="--c: var(--amber)" href="mailto:eric@quixi.ai?subject=Boutique%20data%20curation">
+                    <div class="num">03 · CURATE</div>
+                    <h3>Boutique data curation</h3>
+                    <p>A model is only as good as its data. I build datasets by hand and by machine, then check them by eye.</p>
+                    <ul>
+                        <li>Synthetic data generation and distillation</li>
+                        <li>Filtering, deduplication, and decontamination</li>
+                        <li>Instruction, preference, and reasoning sets</li>
+                    </ul>
+                    <span class="cta">Discuss a dataset <i>→</i></span>
+                </a>
+                <a class="service reveal" style="--c: var(--cyan)" href="mailto:eric@quixi.ai?subject=Consultation">
+                    <div class="num">04 · ADVISE</div>
+                    <h3>Consultation</h3>
+                    <p>Plan, buy, build, and run private AI without the expensive detours. I also help teams deploy and support any of my open-source projects.</p>
+                    <ul>
+                        <li>On-prem hardware selection and TCO</li>
+                        <li>Inference performance and kernel work</li>
+                        <li>Agents, memory, and private AI architecture</li>
+                        <li>Deployment and support for any of my open-source projects: SlimServe, QuixiCore, Hexis, With</li>
+                    </ul>
+                    <span class="cta">Book a conversation <i>→</i></span>
+                </a>
+            </div>
+            <div class="contact-strip reveal">
+                <p>Something else in mind? Write to me directly.</p>
+                <a class="mail" href="mailto:eric@quixi.ai">eric@quixi.ai</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section" style="padding-top: 40px;">
+        <div class="container">
+            <div class="about reveal">
+                <div class="avatar"><img src="/headshot.jpeg" alt="Eric Hartford"></div>
+                <div>
+                    <h3>Eric Hartford</h3>
+                    <div class="role">Founder, Quixi.AI</div>
+                    <p>
+                        I created the Dolphin and Samantha open models, which have millions of downloads, and I've spent years
+                        arguing that open, uncensored, locally owned AI is worth building. Before that I worked at Microsoft, AWS, and eBay.
+                    </p>
+                    <p>
+                        These days I work at every layer of the stack: kernels, inference engines, languages, cognitive architectures,
+                        games, and prose. Mostly on machines I can reach out and touch.
+                    </p>
+                    <p>
+                        Nearly all of it is open source under the MIT or Apache&nbsp;2.0 license. Fork it, ship it, sell it.
+                        If you want help putting it into production, <a href="#work" style="color: var(--primary-2)">that's something I do</a>.
+                    </p>
+                    <div class="socials"><a href="https://github.com/QuixiAI" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://x.com/QuixiAI" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a><a href="https://huggingface.co/QuixiAI" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg></a><a href="https://www.linkedin.com/in/ehartford" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://discord.gg/f7u2MRuPSa" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a><a href="https://www.reddit.com/r/withlang/" target="_blank" rel="noopener" aria-label="Reddit" title="Reddit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg></a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
-                <p>&copy; <span id="year"></span> Quixi.AI. All rights reserved.</p>
-                <div>
-                    <a href="mailto:contact@quixi.ai" style="color: #9ca3af;">contact@quixi.ai</a>
+            <div class="footer-content">
+                <a href="/" class="logo"><div class="logo-icon">Q</div><span>Quixi.AI</span></a>
+                <div class="footer-links">
+                    <a href="https://withlang.org">withlang.org</a>
+                    <a href="/hexis.html">Hexis</a>
+                    <a href="https://huggingface.co/ehartford">huggingface.co/ehartford</a>
+                    <a href="mailto:eric@quixi.ai">eric@quixi.ai</a>
                 </div>
+                <div class="socials"><a href="https://github.com/QuixiAI" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://x.com/QuixiAI" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a><a href="https://huggingface.co/QuixiAI" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/></svg></a><a href="https://www.linkedin.com/in/ehartford" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://discord.gg/f7u2MRuPSa" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a><a href="https://www.reddit.com/r/withlang/" target="_blank" rel="noopener" aria-label="Reddit" title="Reddit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg></a></div>
             </div>
+            <p class="fine" style="margin-top: 28px;">&copy; <span id="year"></span> Quixi.AI &middot; Built by hand, served from a static file.</p>
         </div>
     </footer>
 
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
-        
+
         // Toggle mobile menu
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('active');
+            const open = menu.classList.toggle('active');
+            document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', open);
         }
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.remove('active');
+        document.querySelectorAll('.mobile-menu a').forEach(a =>
+            a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active')));
+
+        // Copy buttons
+        document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copy);
+                btn.textContent = 'copied';
+            } catch (e) {
+                btn.textContent = 'select ↑';
+            }
+            setTimeout(() => btn.textContent = 'copy', 1600);
+        }));
+
+        // Reveal on scroll (also triggers bar charts)
+        const revealer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('in'); revealer.unobserve(e.target); }
             });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealer.observe(el));
+
+        // WIPE video: play muted while on screen, pause when scrolled away
+        const video = document.getElementById('wipe-video');
+        let userPaused = false;
+        video.addEventListener('pause', () => { if (!video.dataset.auto) userPaused = true; delete video.dataset.auto; });
+        video.addEventListener('play', () => { userPaused = false; });
+        new IntersectionObserver(([e]) => {
+            if (e.isIntersecting && !userPaused) {
+                video.play().catch(() => {});
+            } else if (!e.isIntersecting && !video.paused) {
+                video.dataset.auto = '1';
+                video.pause();
+            }
+        }, { threshold: 0.35 }).observe(video);
+
+        // Homelab: link rack units and manifest entries on hover
+        document.querySelectorAll('[data-k]').forEach(el => {
+            const peers = document.querySelectorAll(`[data-k="${el.dataset.k}"]`);
+            el.addEventListener('mouseenter', () => peers.forEach(p => p.classList.add('hl')));
+            el.addEventListener('mouseleave', () => peers.forEach(p => p.classList.remove('hl')));
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+
+        // Hero: a WIPE-style spring lattice that warps around the cursor
+        (function () {
+            const canvas = document.getElementById('grid-canvas');
+            const ctx = canvas.getContext('2d');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const SPACING = 42, K = 0.045, DAMP = 0.9;
+            const COLORS = ['#b6ff3b', '#ff3bd4', '#3be8ff', '#ffb23b'];
+            let W, H, cols, rows, pts = [], sparks = [], mouse = { x: -9999, y: -9999 }, visible = true, dpr = 1;
+
+            function build() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = canvas.clientWidth; H = canvas.clientHeight;
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                cols = Math.ceil(W / SPACING) + 2; rows = Math.ceil(H / SPACING) + 2;
+                pts = [];
+                for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+                    const x = (i - 1) * SPACING, y = (j - 1) * SPACING;
+                    pts.push({ x, y, ox: x, oy: y, vx: 0, vy: 0 });
                 }
+            }
+
+            function impulse(x, y, radius, force) {
+                for (const p of pts) {
+                    const dx = p.x - x, dy = p.y - y, d2 = dx * dx + dy * dy;
+                    if (d2 < radius * radius && d2 > 1) {
+                        const d = Math.sqrt(d2), f = force * (1 - d / radius);
+                        p.vx += dx / d * f; p.vy += dy / d * f;
+                    }
+                }
+            }
+
+            function burst(x, y) {
+                impulse(x, y, 240, 14);
+                const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+                for (let i = 0; i < 34; i++) {
+                    const a = Math.random() * Math.PI * 2, s = 2 + Math.random() * 7;
+                    sparks.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1, c });
+                }
+            }
+
+            function step() {
+                // mouse pushes the lattice gently, like the ship does in WIPE
+                if (mouse.x > -9000) impulse(mouse.x, mouse.y, 130, 0.55);
+                for (const p of pts) {
+                    p.vx += (p.ox - p.x) * K; p.vy += (p.oy - p.y) * K;
+                    p.vx *= DAMP; p.vy *= DAMP;
+                    p.x += p.vx; p.y += p.vy;
+                }
+                for (const s of sparks) { s.x += s.vx; s.y += s.vy; s.vx *= 0.94; s.vy *= 0.94; s.life -= 0.022; }
+                sparks = sparks.filter(s => s.life > 0);
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'rgba(47, 91, 255, 0.28)';
+                ctx.beginPath();
+                for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+                    const p = pts[j * cols + i];
+                    if (i < cols - 1) { const q = pts[j * cols + i + 1]; ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); }
+                    if (j < rows - 1) { const q = pts[(j + 1) * cols + i]; ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); }
+                }
+                ctx.stroke();
+                ctx.globalCompositeOperation = 'lighter';
+                for (const s of sparks) {
+                    ctx.strokeStyle = s.c; ctx.globalAlpha = s.life; ctx.lineWidth = 2;
+                    ctx.shadowColor = s.c; ctx.shadowBlur = 10;
+                    ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * 3, s.y - s.vy * 3); ctx.stroke();
+                }
+                ctx.globalAlpha = 1; ctx.shadowBlur = 0; ctx.globalCompositeOperation = 'source-over';
+            }
+
+            function loop() {
+                if (visible) { step(); draw(); }
+                requestAnimationFrame(loop);
+            }
+
+            build();
+            window.addEventListener('resize', build);
+            if (reduce) { draw(); return; }
+
+            const hero = canvas.parentElement;
+            hero.addEventListener('pointermove', e => {
+                const r = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
             });
-        });
+            hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+            hero.addEventListener('click', e => {
+                if (e.target.closest('a, button')) return;
+                const r = canvas.getBoundingClientRect();
+                burst(e.clientX - r.left, e.clientY - r.top);
+            });
+            new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
+            // ambient detonations so the grid is alive before anyone touches it
+            setInterval(() => { if (visible && !document.hidden) burst(W * (0.45 + Math.random() * 0.5), H * (0.15 + Math.random() * 0.7)); }, 2600);
+            setTimeout(() => burst(W * 0.72, H * 0.42), 500);
+            loop();
+        })();
     </script>
 </body>
 </html>
